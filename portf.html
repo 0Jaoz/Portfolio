@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Currículo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #1b1b1b;
+            color: #131313;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            width: 40px;
+            height: 20px;
+            background-color: #007bff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            transition: justify-content 0.3s;
+        }
+
+        .theme-toggle:before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .theme-toggle {
+            justify-content: flex-start;
+        }
+
+        .dark-mode .theme-toggle:before {
+            transform: translateX(-20px);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #0a0a0a;
+            transition: color 0.3s;
+        }
+
+        .dark-mode header h1 {
+            color: #ffffff;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #b0b0b0;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .personal-info, .education {
+            margin-bottom: 30px;
+        }
+
+        .personal-info ul, .education ul {
+            list-style-type: none;
+            display: none;
+        }
+
+        .personal-info ul.visible, .education ul.visible {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #888;
+        }
+
+        .toggle-section-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: #007bff;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .toggle-section-btn:hover {
+            color: #0056b3;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .container {
+            background-color: #1e1e1e;
+        }
+
+        .dark-mode .section-title {
+            border-bottom-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- Verifique se o caminho da imagem está correto para o seu sistema ou substitua por um URL -->
+            <img src="c:\Users\01703402\Downloads\50b17dbb-6326-4e06-8a98-05749f662a78.jpg" alt="Foto de Perfil" class="profile-pic">
+            <div class="theme-toggle" onclick="toggleTheme()"></div>
+            <h1>João Henrique</h1>
+            <p>Estudante de TI</p>
+        </header>
+
+        <section class="personal-info">
+            <h2 class="section-title">Informações Pessoais</h2>
+            <button class="toggle-section-btn" onclick="toggleSection('personal-info')">👁️</button>
+            <ul>
+                <li><strong>Data de Nascimento:</strong> 24/05/2005</li>
+                <li><strong>Endereço:</strong> Recife, Pernambuco</li>
+                <li><strong>Email:</strong> <span id="email" onclick="copyEmail()">joaoalvesguimaraes1998@gmail.com</span></li>
+                <li><strong>Telefone:</strong> (81) 98590-0143</li>
+                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jo%C3%A3ohenriquealvesguimaraes" target="_blank">LinkedIn</a></li>
+            </ul>
+        </section>
+
+        <section class="education">
+            <h2 class="section-title">Formação Acadêmica e Cursos</h2>
+            <button class="toggle-section-btn" onclick="toggleSection('education')">👁️</button>
+            <ul>
+                <li>
+                    <strong>Análise e Desenvolvimento de sistemas</strong><br>
+                    Centro Universitário Uninassau Recife - Previsão de conclusão 2025 (2°)
+                </li>
+                <li>
+                    <strong>Lógica de programação com Python</strong><br>
+                    Treina Recife - Agosto/2024 - 30H
+                </li>
+                <li>
+                    <strong>Pacote Office</strong><br>
+                    Fundação Bradesco - Maio/2024 - 20H
+                </li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; João Henrique - 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        let isDarkMode = false;
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+        }
+
+        function toggleSection(sectionClass) {
+            const allSections = document.querySelectorAll('.container section ul');
+            allSections.forEach(section => {
+                if (!section.classList.contains(sectionClass)) {
+                    section.classList.remove('visible');
+                }
+            });
+
+            const section = document.querySelector(`.${sectionClass} ul`);
+            if (section) {
+                section.classList.toggle('visible');
+            }
+        }
+
+        function copyEmail() {
+            const email = document.getElementById('email').textContent;
+            navigator.clipboard.writeText(email).then(() => {
+                alert('Email copiado para a área de transferência!');
+            });
+        }
+    </script>
+</body>
+</html>
